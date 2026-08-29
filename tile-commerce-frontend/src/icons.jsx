@@ -1,0 +1,63 @@
+import React from 'react'
+
+const shapes = {
+  Boxes: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>,
+  FileSpreadsheet: <><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h8M12 11v8"/></>,
+  Import: <><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 20h14"/></>,
+  Package: <><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4.5 7.5 7.5 4 7.5-4M12 12v9"/></>,
+  RefreshCw: <><path d="M20 11a8 8 0 0 0-14-4L3 10"/><path d="M3 5v5h5"/><path d="M4 13a8 8 0 0 0 14 4l3-3"/><path d="M21 19v-5h-5"/></>,
+  Store: <><path d="M4 10v10h16V10M3 10l2-6h14l2 6"/><path d="M3 10a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M9 20v-6h6v6"/></>,
+  ShieldCheck: <><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m8.5 12 2.3 2.3 4.8-5"/></>,
+  CheckCircle2: <><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></>,
+  Check: <><path d="m5 12 4 4L19 6"/></>,
+  AlertCircle: <><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></>,
+  CloudDownload: <><path d="M7 18a5 5 0 1 1 1.2-9.85A6 6 0 0 1 20 11a4 4 0 0 1-1 7h-3"/><path d="M12 12v7M9 16l3 3 3-3"/></>,
+  CloudUpload: <><path d="M7 18a5 5 0 1 1 1.2-9.85A6 6 0 0 1 20 11a4 4 0 0 1-1 7h-3"/><path d="M12 19v-7M9 15l3-3 3 3"/></>,
+  Upload: <><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></>,
+  Download: <><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></>,
+  Search: <><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></>,
+  Filter: <><path d="M4 5h16M7 12h10M10 19h4"/></>,
+  X: <><path d="m6 6 12 12M18 6 6 18"/></>,
+  Plus: <><path d="M12 5v14M5 12h14"/></>,
+  Minus: <><path d="M5 12h14"/></>,
+  ArrowLeft: <><path d="M19 12H5M11 18l-6-6 6-6"/></>,
+  ArrowRight: <><path d="M5 12h14M13 6l6 6-6 6"/></>,
+  ArrowUpRight: <><path d="M7 17 17 7M8 7h9v9"/></>,
+  ChevronLeft: <><path d="m14 18-6-6 6-6"/></>,
+  ChevronRight: <><path d="m10 18 6-6-6-6"/></>,
+  ChevronDown: <><path d="m6 9 6 6 6-6"/></>,
+  Menu: <><path d="M4 7h16M4 12h16M4 17h16"/></>,
+  Bell: <><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></>,
+  LogOut: <><path d="M10 17l5-5-5-5M15 12H3M21 3v18"/></>,
+  LogIn: <><path d="M14 8l4 4-4 4M18 12H4M21 3v18"/></>,
+  UserRound: <><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></>,
+  UserPlus: <><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></>,
+  LockKeyhole: <><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></>,
+  Mail: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></>,
+  MapPin: <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>,
+  CreditCard: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h3"/></>,
+  PackageCheck: <><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m9 12 2 2 4-4"/></>,
+  ShoppingCart: <><path d="M3 4h2l2 11h10l3-8H6"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></>,
+  ShoppingBag: <><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></>,
+  Trash2: <><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></>,
+  FileText: <><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h6M9 16h6"/></>,
+  ClipboardList: <><path d="M9 5h6M9 10h6M9 15h6M5 4h14v17H5z"/><path d="M9 3h6v4H9z"/></>,
+  PackageOpen: <><path d="m12 3 8 4v10l-8 4-8-4V7l8-4Z"/><path d="M4 7l8 4 8-4M12 11v10"/></>,
+  PackageSearch: <><path d="m12 3 8 4v7"/><path d="M4 7v10l8 4 3-1.5"/><path d="M4 7l8 4 8-4M12 11v4"/><circle cx="17.5" cy="17.5" r="3"/><path d="m20 20 2 2"/></>,
+  Layers3: <><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></>,
+  Grid2X2: <><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></>,
+  Database: <><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 2 3.6 3 8 3s8-1 8-3V5M4 12v7c0 2 3.6 3 8 3s8-1 8-3v-7"/></>,
+  LayoutDashboard: <><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/></>,
+  Settings: <><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="m19.4 15 .1.1 1.1 1.1-2.1 2.1-1.2-1.1a8.7 8.7 0 0 1-2.1.9V20h-3v-1.9a8.7 8.7 0 0 1-2.1-.9l-1.2 1.1-2.1-2.1 1.1-1.1.1-.1a8.7 8.7 0 0 1-.9-2.1H5v-3h2.1a8.7 8.7 0 0 1 .9-2.1L6.9 6.7l2.1-2.1 1.2 1.1a8.7 8.7 0 0 1 2.1-.9V3h3v1.8a8.7 8.7 0 0 1 2.1.9l1.2-1.1 2.1 2.1-1.1 1.1-.1.1a8.7 8.7 0 0 1 .9 2.1H21v3h-1.7a8.7 8.7 0 0 1-.9 2.1Z"/></>,
+  CircleHelp: <><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.6 2.6 0 1 1 4.7 1.5c-.9 1-2.2 1.3-2.2 2.8M12 17h.01"/></>,
+  BarChart3: <><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></>,
+  ImportIcon: <><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></>,
+  FileSpreadsheetIcon: <><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h8M12 11v8"/></>,
+}
+
+export function Icon({name, size=20, ...props}) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>{shapes[name] || shapes.Boxes}</svg>
+}
+
+export const icons = Object.fromEntries(Object.keys(shapes).map(name => [name, (props) => <Icon name={name} {...props}/>]))
+export const { Boxes, FileSpreadsheet, Import, Package, RefreshCw, Store, ShieldCheck, CheckCircle2, Check, AlertCircle, CloudDownload, CloudUpload, Upload, Download, Search, Filter, X, Plus, Minus, ArrowLeft, ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown, Menu, Bell, LogOut, LogIn, UserRound, UserPlus, LockKeyhole, Mail, MapPin, CreditCard, PackageCheck, ShoppingCart, ShoppingBag, Trash2, FileText, ClipboardList, PackageOpen, PackageSearch, Layers3, Grid2X2, Database, LayoutDashboard, Settings, CircleHelp, BarChart3 } = icons

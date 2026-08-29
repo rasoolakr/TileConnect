@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: tile_commerce
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  backend:
+    build: .
+    depends_on:
+      - mysql
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/tile_commerce?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET: VGhpc0lzQURldm9wTW9kZVNlY3JldEtleUZvckxvY2FsRGV2ZWxvcG1lbnQxMjM0NTY3ODkw
+    ports:
+      - "9191:9191"
+volumes:
+  mysql_data:

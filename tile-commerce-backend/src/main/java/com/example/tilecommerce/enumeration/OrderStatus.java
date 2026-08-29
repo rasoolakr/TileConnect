@@ -1,0 +1,5 @@
+package com.example.tilecommerce.enumeration;
+public enum OrderStatus {
+    CREATED, PAYMENT_PENDING, PAYMENT_SUBMITTED, PAYMENT_VERIFIED, CONFIRMED,
+    PROCESSING, PACKED, SHIPPED, DELIVERED, CANCELLED, REJECTED
+}
