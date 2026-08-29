@@ -1,35 +1,65 @@
 package com.example.tilecommerce.controller;
 
 import com.example.tilecommerce.dto.CartDtos.*;
-import com.example.tilecommerce.entity.Cart;
 import com.example.tilecommerce.service.CartService;
+
 import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
 public class CartController {
-	private final CartService s;
 
-	@GetMapping
-	public Cart get() {
-		return s.get();
-	}
+    private final CartService service;
 
-	@PostMapping("/shops/{shopId}/items")
-	public Cart add(@PathVariable Long shopId, @Valid @RequestBody AddCartItemRequest r) {
-		return s.add(shopId, r);
-	}
+    // =========================================================
+    // GET CART
+    // =========================================================
 
-	@PutMapping("/items/{itemId}")
-	public Cart update(@PathVariable Long itemId, @Valid @RequestBody UpdateCartItemRequest r) {
-		return s.update(itemId, r.quantity());
-	}
+    @GetMapping
+    public CartResponse get() {
+        return service.get();
+    }
 
-	@DeleteMapping("/items/{itemId}")
-	public Cart remove(@PathVariable Long itemId) {
-		return s.remove(itemId);
-	}
+    // =========================================================
+    // ADD ITEM
+    // =========================================================
+
+    @PostMapping("/shops/{shopId}/items")
+    public CartResponse add(
+            @PathVariable Long shopId,
+            @Valid @RequestBody AddCartItemRequest request) {
+
+        return service.add(shopId, request);
+    }
+
+    // =========================================================
+    // UPDATE ITEM
+    // =========================================================
+
+    @PutMapping("/items/{itemId}")
+    public CartResponse update(
+            @PathVariable Long itemId,
+            @Valid @RequestBody UpdateCartItemRequest request) {
+
+        return service.update(
+                itemId,
+                request.quantity()
+        );
+    }
+
+    // =========================================================
+    // REMOVE ITEM
+    // =========================================================
+
+    @DeleteMapping("/items/{itemId}")
+    public CartResponse remove(
+            @PathVariable Long itemId) {
+
+        return service.remove(itemId);
+    }
 }

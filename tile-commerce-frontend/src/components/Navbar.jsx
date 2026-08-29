@@ -110,22 +110,37 @@ export default function Navbar() {
    * the cart count.
    */
   useEffect(() => {
-    const handleCartUpdated = () => {
-      loadCartCount();
-    };
+  const handleCartUpdated = (event) => {
+    const cart = event.detail;
 
-    window.addEventListener(
+    // Use the updated cart returned by the backend
+    if (cart?.items) {
+      const total = cart.items.reduce(
+        (sum, item) =>
+          sum + Number(item.quantity || 0),
+        0
+      );
+
+      setCartCount(total);
+      return;
+    }
+
+    // Fallback: load cart from backend
+    loadCartCount();
+  };
+
+  window.addEventListener(
+    "cart-updated",
+    handleCartUpdated
+  );
+
+  return () => {
+    window.removeEventListener(
       "cart-updated",
       handleCartUpdated
     );
-
-    return () => {
-      window.removeEventListener(
-        "cart-updated",
-        handleCartUpdated
-      );
-    };
-  }, [loadCartCount]);
+  };
+}, [loadCartCount]);
 
   return (
     <header className="site-nav">
