@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const STORAGE_KEY = 'tilecommerce.auth.v2'
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api'
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:9195/api'
 })
 
 api.interceptors.request.use(config => {
