@@ -313,4 +313,23 @@ public class ProductService {
                 .replaceAll("[^a-z0-9]+", "-")
                 .replaceAll("^-|-$", "");
     }
+    
+    public void deleteProduct(Long productId) {
+
+        Product product = products.findById(productId)
+                .orElseThrow(() ->
+                        new RuntimeException("Product not found with ID: " + productId)
+                );
+
+        // Make sure the product belongs to the logged-in shop owner
+        if (product.getShop() == null) {
+
+            throw new RuntimeException(
+                    "You are not authorized to remove this product"
+            );
+        }
+
+        product.setActive(false);
+        products.save(product);
+    }
 }

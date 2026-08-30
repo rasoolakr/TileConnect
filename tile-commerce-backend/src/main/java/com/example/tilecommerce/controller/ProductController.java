@@ -8,10 +8,15 @@ import com.example.tilecommerce.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
@@ -64,5 +69,27 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('SUPER_ADMIN','SHOP_OWNER')")
     public Product create(@Valid @RequestBody ProductRequest r) {
         return service.create(r);
+    }
+    
+    @PatchMapping("/{productId}")
+    public ResponseEntity<?> deleteProduct(
+            @PathVariable Long productId,
+            Authentication authentication) {
+
+        try {
+            service.deleteProduct(productId);
+
+            return ResponseEntity.ok(
+                    Map.of(
+                            "message", "Product removed successfully",
+                            "productId", productId
+                    )
+            );
+
+        } catch (RuntimeException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("message", e.getMessage()));
+        }
     }
 }

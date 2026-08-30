@@ -41,7 +41,7 @@ Admin -> Catalog imports contains two options:
    - Creates/updates a size variant.
    - Saves a product image URL when supplied.
 
-The uploaded archive did not contain a separate Anjani Tek backend project; the supplied TileCommerce frontend referenced an Anjani service at `http://localhost:9292`. Therefore this combined project preserves that integration boundary instead of inventing a missing supplier backend.
+The uploaded archive did not contain a separate Anjani Tek backend project; the supplied TileCommerce frontend referenced an Anjani service at `http://localhost:9196`. Therefore this combined project preserves that integration boundary instead of inventing a missing supplier backend.
 
 ## Image / variant fixes
 
